@@ -1,5 +1,7 @@
 from django.db import models
 
+from Tolem.api.models.restaurant import Restaurant
+
 
 class User(models.Model):
     username = models.CharField(
@@ -65,10 +67,7 @@ class Manager(models.Model):
         help_text='User manager'
     )
     # FIXME: need to change to foreign key
-    company = models.CharField(
-        max_length=128,
-        verbose_name='Company'
-    )
+    company = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Manager'
