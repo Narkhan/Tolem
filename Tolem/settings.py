@@ -78,8 +78,13 @@ WSGI_APPLICATION = 'Tolem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'defaultdb',
+        'USER': 'doadmin',
+        'PASSWORD': 'AVNS_hEwaoMkTPKm1bBa3HWd',
+        'HOST': 'db-postgresql-fra1-68281-do-user-11895338-0.b.db.ondigitalocean.com',
+        'PORT': '25060',
+        'OPTIONS': {'sslmode': 'require'},
     }
 }
 
