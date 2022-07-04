@@ -1,6 +1,6 @@
 from django.db import models
 
-from Tolem.api.models.restaurant import Restaurant
+from api.models.restaurant import Restaurant
 
 
 class User(models.Model):
