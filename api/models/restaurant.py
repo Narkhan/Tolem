@@ -29,6 +29,9 @@ class Category(models.Model):
         help_text='Food category'
     )
 
+    def __str__(self):
+        return self.name
+
 
 class FoodItem(models.Model):
     name = models.CharField(
@@ -47,6 +50,9 @@ class FoodItem(models.Model):
     )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Menu(models.Model):
