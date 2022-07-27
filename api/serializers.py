@@ -1,6 +1,13 @@
 from rest_framework import serializers
 
-from api.models.restaurant import Restaurant, Menu, FoodItem, Category, Order, OrderItem
+from api.models.restaurant import (
+    Restaurant,
+    Menu,
+    FoodItem,
+    Category,
+    Order,
+    OrderItem
+)
 
 
 class RestaurantSerializer(serializers.ModelSerializer):

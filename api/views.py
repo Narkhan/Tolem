@@ -1,10 +1,25 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
-from api.models.restaurant import Restaurant, Menu, FoodItem, Category, Order, OrderItem
+from api.models.restaurant import (
+    Restaurant,
+    Menu,
+    FoodItem,
+    Category,
+    Order,
+    OrderItem
+)
+
 from api.pagination import DefaultTolemPagination
-from api.serializers import RestaurantSerializer, MenuSerializer, FoodItemSerializer, CategorySerializer, \
-    OrderItemSerializer, OrderSerializer
+
+from api.serializers import (
+    RestaurantSerializer,
+    MenuSerializer,
+    FoodItemSerializer,
+    CategorySerializer,
+    OrderItemSerializer,
+    OrderSerializer
+)
 
 
 class RestaurantViewSet(viewsets.mixins.ListModelMixin,

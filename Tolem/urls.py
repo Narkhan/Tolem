@@ -15,10 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView
+)
 from rest_framework import routers
 
-from api.views import RestaurantViewSet, MenuViewSet, FoodItemViewSet, CategoryViewSet, OrderViewSet, OrderItemViewSet
+from api.views import (
+    RestaurantViewSet,
+    MenuViewSet,
+    FoodItemViewSet,
+    CategoryViewSet,
+    OrderViewSet,
+    OrderItemViewSet
+)
 
 router = routers.SimpleRouter()
 router.register(r'restaurant', RestaurantViewSet, basename='restaurant')
