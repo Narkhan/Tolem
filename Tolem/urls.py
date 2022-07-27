@@ -15,14 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView
+)
 from rest_framework import routers
 
-from api.views import RestaurantViewSet, MenuViewSet
+from api.views import (
+    RestaurantViewSet,
+    MenuViewSet,
+    FoodItemViewSet,
+    CategoryViewSet,
+    OrderViewSet,
+    OrderItemViewSet
+)
 
 router = routers.SimpleRouter()
-router.register(r'restaurant', RestaurantViewSet)
-router.register(r'menu', MenuViewSet)
+router.register(r'restaurant', RestaurantViewSet, basename='restaurant')
+router.register(r'menu', MenuViewSet, basename='menu')
+router.register(r'food_item', FoodItemViewSet, basename='food_item')
+router.register(r'category', CategoryViewSet, basename='category')
+router.register(r'order', OrderViewSet, basename='order')
+router.register(r'order_item', OrderItemViewSet, basename='order_item')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
