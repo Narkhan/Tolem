@@ -16,7 +16,9 @@ class RestaurantSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
-            'address'
+            'address',
+            'latitude',
+            'longitude',
         )
 
 
@@ -56,9 +58,12 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = (
-            'id',
-            'restaurant',
-            'food_items'
+            'user',
+            'order_item',
+            'complete',
+            'transaction_id',
+            'is_paid',
+            'received'
         )
 
 
@@ -71,3 +76,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'food_item',
             'quantity'
         )
+
+
+class RestaurantDistanceSerializer(serializers.Serializer):
+    latitude = serializers.FloatField()
+    longitude = serializers.FloatField()
+
