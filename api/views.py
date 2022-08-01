@@ -1,5 +1,9 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from api.services import get_distance
 
 from api.models.restaurant import (
     Restaurant,
@@ -18,7 +22,8 @@ from api.serializers import (
     FoodItemSerializer,
     CategorySerializer,
     OrderItemSerializer,
-    OrderSerializer
+    OrderSerializer,
+    RestaurantDistanceSerializer
 )
 
 
@@ -35,6 +40,20 @@ class RestaurantViewSet(viewsets.mixins.ListModelMixin,
 
     def get_serializer_class(self):
         return RestaurantSerializer
+
+    @extend_schema(request=RestaurantDistanceSerializer)
+    @action(detail=True, methods=['post'])
+    def get_distance(self, request, pk):
+        restaurant = self.get_object()
+        latitude = request.data.get('latitude')
+        longitude = request.data.get('longitude')
+
+        return Response(get_distance(
+            latitude,
+            longitude,
+            restaurant.latitude,
+            restaurant.longitude,
+        ))
 
 
 class MenuViewSet(viewsets.mixins.ListModelMixin,
@@ -114,3 +133,4 @@ class OrderItemViewSet(viewsets.mixins.ListModelMixin,
 
     def get_serializer_class(self):
         return OrderItemSerializer
+
