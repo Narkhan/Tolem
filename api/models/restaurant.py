@@ -159,6 +159,12 @@ class Order(TimestampMixin):
         verbose_name='User that ordered',
         help_text='User that ordered'
     )
+    restaurant = models.ForeignKey(
+        Restaurant,
+        on_delete=models.DO_NOTHING,
+        verbose_name='Restaurant',
+        help_text='Restaurant'
+    )
     order_item = models.ManyToManyField(
         'OrderItem',
         related_name='order_items',
@@ -184,6 +190,10 @@ class Order(TimestampMixin):
         default=False,
         verbose_name='Is received?',
         help_text='Is received?'
+    )
+    table_number = models.PositiveSmallIntegerField(
+        verbose_name='Table number',
+        help_text='Table number'
     )
 
     class Meta:
