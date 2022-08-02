@@ -46,6 +46,14 @@ class Restaurant(TimestampMixin):
         verbose_name='Address',
         help_text='Restaurant address'
     )
+    latitude = models.FloatField(
+        verbose_name='Latitude',
+        help_text='Restaurant latitude'
+    )
+    longitude = models.FloatField(
+        verbose_name='Longitude',
+        help_text='Restaurant longitude'
+    )
 
     class Meta:
         verbose_name = 'Restaurant'
