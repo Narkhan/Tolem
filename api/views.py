@@ -48,12 +48,14 @@ class RestaurantViewSet(viewsets.mixins.ListModelMixin,
         latitude = request.data.get('latitude')
         longitude = request.data.get('longitude')
 
-        return Response(get_distance(
-            latitude,
-            longitude,
-            restaurant.latitude,
-            restaurant.longitude,
-        ))
+        return Response({
+            'distance': get_distance(
+                latitude,
+                longitude,
+                restaurant.latitude,
+                restaurant.longitude
+            )
+        })
 
 
 class MenuViewSet(viewsets.mixins.ListModelMixin,
@@ -133,4 +135,3 @@ class OrderItemViewSet(viewsets.mixins.ListModelMixin,
 
     def get_serializer_class(self):
         return OrderItemSerializer
-
