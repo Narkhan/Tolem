@@ -23,7 +23,8 @@ from api.serializers import (
     CategorySerializer,
     OrderItemSerializer,
     OrderSerializer,
-    RestaurantDistanceSerializer
+    RestaurantDistanceSerializer,
+    RestaurantStatisticsSerializer
 )
 
 
@@ -39,11 +40,13 @@ class RestaurantViewSet(viewsets.mixins.ListModelMixin,
         return Restaurant.objects.all()
 
     def get_serializer_class(self):
+        if self.action == 'statistics':
+            return RestaurantStatisticsSerializer
         return RestaurantSerializer
 
     @extend_schema(request=RestaurantDistanceSerializer)
     @action(detail=True, methods=['post'])
-    def get_distance(self, request, pk):
+    def distance(self, request, pk):
         restaurant = self.get_object()
         latitude = request.data.get('latitude')
         longitude = request.data.get('longitude')
@@ -56,6 +59,13 @@ class RestaurantViewSet(viewsets.mixins.ListModelMixin,
                 restaurant.longitude
             )
         })
+
+    @action(detail=True, methods=['get'])
+    def statistics(self, request, pk):
+        restaurant = self.get_object()
+        print(restaurant)
+        serializer = self.get_serializer(restaurant)
+        return Response(serializer.data)
 
 
 class MenuViewSet(viewsets.mixins.ListModelMixin,

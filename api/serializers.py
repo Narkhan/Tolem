@@ -72,7 +72,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
         model = OrderItem
         fields = (
             'id',
-            'order',
             'food_item',
             'quantity'
         )
@@ -82,3 +81,27 @@ class RestaurantDistanceSerializer(serializers.Serializer):
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
 
+
+class RestaurantStatisticsSerializer(serializers.ModelSerializer):
+    food_item_number = serializers.SerializerMethodField()
+    order_number = serializers.SerializerMethodField()
+    order_item_number = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Restaurant
+        fields = (
+            'id',
+            'name',
+            'food_item_number',
+            'order_number',
+            'order_item_number',
+        )
+
+    def get_order_number(self, obj) -> int:
+        return obj.order_set.count()
+
+    def get_food_item_number(self, obj) -> int:
+        return obj.menu.food_items.count()
+
+    def get_order_item_number(self, obj) -> int:
+        return sum([order.order_item.count() for order in obj.order_set.all()])
