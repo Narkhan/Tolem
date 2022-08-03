@@ -71,8 +71,8 @@ class FoodItem(TimestampMixin):
     )
     description = models.CharField(
         max_length=255,
-        verbose_name='Name',
-        help_text='Food name'
+        verbose_name='Description',
+        help_text='Food Description'
     )
     price = models.PositiveIntegerField(
         default=0,
@@ -205,13 +205,6 @@ class Order(TimestampMixin):
 
 
 class OrderItem(TimestampMixin):
-    order = models.ForeignKey(
-        Order,
-        on_delete=models.SET_NULL,
-        null=True,
-        verbose_name='Order',
-        help_text='Order'
-    )
     food_item = models.ForeignKey(
         FoodItem,
         on_delete=models.DO_NOTHING,
