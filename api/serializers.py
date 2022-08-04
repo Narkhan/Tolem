@@ -55,6 +55,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    cost = serializers.SerializerMethodField()
+
     class Meta:
         model = Order
         fields = (
@@ -63,8 +65,12 @@ class OrderSerializer(serializers.ModelSerializer):
             'complete',
             'transaction_id',
             'is_paid',
-            'received'
+            'received',
+            'cost'
         )
+
+    def get_cost(self, obj) -> int:
+        return sum([item.quantity * item.food_item.price for item in obj.order_item.all()])
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
