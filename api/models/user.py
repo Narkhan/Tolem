@@ -1,46 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 from api.models.restaurant import Restaurant
 
 
-class User(models.Model):
-    username = models.CharField(
-        max_length=50,
-        verbose_name='Username',
-        unique=True,
-        help_text='Username for login'
-    )
-    password = models.CharField(
-        max_length=50,
-        verbose_name='Password',
-        help_text='Password for login'
-    )
-    email = models.EmailField(
-        max_length=254,
-        verbose_name='Email',
-        unique=True,
-        help_text='Email for login'
-    )
-    first_name = models.CharField(
-        max_length=50,
-        verbose_name='First Name',
-        help_text='First Name'
-    )
-    last_name = models.CharField(
-        max_length=50,
-        verbose_name='Last Name',
-        help_text='Last Name'
-    )
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name='Is Active',
-        help_text='Is Active'
-    )
-    is_admin = models.BooleanField(
-        default=False,
-        verbose_name='Is Admin',
-        help_text='Is Admin'
-    )
+class User(AbstractUser):
     phone = models.CharField(
         max_length=50,
         verbose_name='Phone'

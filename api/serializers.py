@@ -8,6 +8,63 @@ from api.models.restaurant import (
     Order,
     OrderItem
 )
+from api.models.user import User
+from rest_framework.authtoken.models import Token
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+        )
+        extra_kwargs = {
+            'username': {'write_only': True},
+            'password': {'write_only': True},
+        }
+
+    def validate_username(self, value):
+        if not value:
+            raise serializers.ValidationError('Username is required')
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError('User with that username already exists')
+        return value
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            password=validated_data['password'],
+        )
+        print(user)
+        Token.objects.get_or_create(user=user)
+        return user
+
+
+class ObtainTokenSerializer(serializers.Serializer):
+    token = serializers.CharField(
+        read_only=True
+    )
+    username = serializers.CharField(
+        write_only=True,
+    )
+    password = serializers.CharField(
+        write_only=True
+    )
+
+    def validate(self, attrs):
+        validated_data = super().validate(attrs)
+        user = User.objects.filter(
+            username=validated_data['username']
+        ).first()
+        if not user:
+            raise serializers.ValidationError('User does not exists')
+        is_valid_password = user.check_password(validated_data['password'])
+        if not is_valid_password:
+            raise serializers.ValidationError('Invalid password')
+        token, _ = Token.objects.get_or_create(user=user)
+        validated_data['token'] = token.key
+        return validated_data
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
