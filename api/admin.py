@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from api.models.restaurant import (
+from api.models import (
+    User,
     Restaurant,
     Menu,
     FoodItem,
@@ -9,7 +10,6 @@ from api.models.restaurant import (
     Order,
     OrderItem,
 )
-from api.models.user import User
 
 admin.site.register(Restaurant)
 admin.site.register(Menu)

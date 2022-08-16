@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from api.services import get_distance
 
-from api.models.restaurant import (
+from api.models import (
+    User,
     Restaurant,
     Menu,
     FoodItem,
@@ -14,7 +15,6 @@ from api.models.restaurant import (
     OrderItem
 )
 
-from api.models.user import User
 from api.pagination import DefaultTolemPagination
 
 from api.serializers import (
