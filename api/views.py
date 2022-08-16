@@ -25,7 +25,9 @@ from api.serializers import (
     OrderItemSerializer,
     OrderSerializer,
     RestaurantDistanceSerializer,
-    RestaurantStatisticsSerializer, UserCreateSerializer
+    RestaurantStatisticsSerializer,
+    UserCreateSerializer,
+    ObtainTokenSerializer,
 )
 
 
@@ -148,11 +150,7 @@ class OrderItemViewSet(viewsets.mixins.ListModelMixin,
         return OrderItemSerializer
 
 
-class UserViewSet(viewsets.mixins.ListModelMixin,
-                  viewsets.mixins.RetrieveModelMixin,
-                  viewsets.mixins.CreateModelMixin,
-                  viewsets.mixins.DestroyModelMixin,
-                  viewsets.mixins.UpdateModelMixin,
+class UserViewSet(viewsets.mixins.CreateModelMixin,
                   viewsets.GenericViewSet):
     pagination_class = DefaultTolemPagination
 
@@ -160,4 +158,13 @@ class UserViewSet(viewsets.mixins.ListModelMixin,
         return User.objects.all()
 
     def get_serializer_class(self):
+        if self.action == 'login':
+            return ObtainTokenSerializer
         return UserCreateSerializer
+
+    @action(detail=False, methods=['post'])
+    def login(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data)
+
