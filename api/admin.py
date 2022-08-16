@@ -7,8 +7,9 @@ from api.models.restaurant import (
     FoodItem,
     Category,
     Order,
-    OrderItem
+    OrderItem,
 )
+from api.models.user import User
 
 admin.site.register(Restaurant)
 admin.site.register(Menu)
@@ -16,4 +17,5 @@ admin.site.register(FoodItem)
 admin.site.register(Category)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(User)
 

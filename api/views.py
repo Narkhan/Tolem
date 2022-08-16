@@ -14,6 +14,7 @@ from api.models.restaurant import (
     OrderItem
 )
 
+from api.models.user import User
 from api.pagination import DefaultTolemPagination
 
 from api.serializers import (
@@ -24,7 +25,7 @@ from api.serializers import (
     OrderItemSerializer,
     OrderSerializer,
     RestaurantDistanceSerializer,
-    RestaurantStatisticsSerializer
+    RestaurantStatisticsSerializer, UserCreateSerializer
 )
 
 
@@ -145,3 +146,18 @@ class OrderItemViewSet(viewsets.mixins.ListModelMixin,
 
     def get_serializer_class(self):
         return OrderItemSerializer
+
+
+class UserViewSet(viewsets.mixins.ListModelMixin,
+                  viewsets.mixins.RetrieveModelMixin,
+                  viewsets.mixins.CreateModelMixin,
+                  viewsets.mixins.DestroyModelMixin,
+                  viewsets.mixins.UpdateModelMixin,
+                  viewsets.GenericViewSet):
+    pagination_class = DefaultTolemPagination
+
+    def get_queryset(self):
+        return User.objects.all()
+
+    def get_serializer_class(self):
+        return UserCreateSerializer

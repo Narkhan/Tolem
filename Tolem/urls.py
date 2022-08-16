@@ -28,7 +28,8 @@ from api.views import (
     FoodItemViewSet,
     CategoryViewSet,
     OrderViewSet,
-    OrderItemViewSet
+    OrderItemViewSet,
+    UserViewSet
 )
 
 router = routers.SimpleRouter()
@@ -38,7 +39,7 @@ router.register(r'food_item', FoodItemViewSet, basename='food_item')
 router.register(r'category', CategoryViewSet, basename='category')
 router.register(r'order', OrderViewSet, basename='order')
 router.register(r'order_item', OrderItemViewSet, basename='order_item')
-
+router.register(r'user', UserViewSet, basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
