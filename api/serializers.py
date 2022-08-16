@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from api.models.restaurant import (
+from api.models import (
+    User,
     Restaurant,
     Menu,
     FoodItem,
@@ -8,7 +9,6 @@ from api.models.restaurant import (
     Order,
     OrderItem
 )
-from api.models.user import User
 from rest_framework.authtoken.models import Token
 
 
