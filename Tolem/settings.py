@@ -86,11 +86,11 @@ load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME', 'defaultdb'),
-        'USER': os.getenv('DB_USER', 'doadmin'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'AVNS_hEwaoMkTPKm1bBa3HWd'),
-        'HOST': os.getenv('DB_HOST', 'db-postgresql-fra1-68281-do-user-11895338-0.b.db.ondigitalocean.com'),
-        'PORT': os.getenv('DB_PORT', '25060'),
+        'NAME': os.getenv('DB_NAME', 'd1scpjb71mhodv'),
+        'USER': os.getenv('DB_USER', 'tafihgdndcaqtp'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'c177e842e1650493ce28169fc98db6d6a1649c4657a1c2d1db222047ece293e3'),
+        'HOST': os.getenv('DB_HOST', 'ec2-34-252-216-149.eu-west-1.compute.amazonaws.com'),
+        'PORT': os.getenv('DB_PORT', '5432'),
         # 'OPTIONS': {'sslmode': 'require'},
     }
 }
