@@ -36,7 +36,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             username=validated_data['username'],
             password=validated_data['password'],
         )
-        print(user)
         Token.objects.get_or_create(user=user)
         return user
 
